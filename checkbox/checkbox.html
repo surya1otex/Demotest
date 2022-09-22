@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	
+</head>
+<body>
+ <div class="pricing-levels-3">
+          <p><strong>Which level would you like? (Select 3 Levels)</strong></p>
+          <input id="chk1" class="single-checkbox"type="checkbox" name="vehicle" value="1">Level 1 <label id="lbl1"></label><br>
+          <input id="chk2" class="single-checkbox" type="checkbox" name="vehicle" value="2">Level 2<label id="lbl2"></label><br>
+          <input id="chk3" class="single-checkbox" type="checkbox" name="vehicle" value="3">Level 3<label id="lbl3"></label><br>
+          <input id="chk4" class="single-checkbox" type="checkbox" name="vehicle" value="4">Level 4<label id="lbl4"></label><br>
+          <input id="chk5" class="single-checkbox" type="checkbox" name="vehicle" value="5">Level 5<label id="lbl5"></label><br>
+          <input id="chk6" class="single-checkbox" type="checkbox" name="vehicle" value="6">Level 6<label id="lbl6"></label><br>
+          <input id="chk7" class="single-checkbox" type="checkbox" name="vehicle" value="7">Level 7<label id="lbl7"></label><br>
+        </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+	var index = 1;
+
+	var chklnt = $('.single-checkbox');
+
+   for(let i = 1; i <= chklnt.length; i++) {
+
+         $('#chk'+ i).change(function(e) {
+
+         	var length = $('input[type=checkbox]:checked').length;
+
+
+  if ($('input[type=checkbox]:checked').length > 3) {
+   	    
+        $(this).prop('checked', false);
+        $('#lbl' + i).text('');
+        //index--;
+   }
+   else if($(this).is(":not(:checked)")) {
+
+     if(length == 0) {
+       $("#lbl" + $(this).val()).text('');
+     }
+    var id = $('input[type=checkbox]:checked').last().attr("id");
+    var num = id.slice(3);         
+        if(length == 1) {
+ 
+          id = $('input[type=checkbox]:checked').first().attr("id");
+          num = id.slice(3);
+
+          length = length;
+          $('#lbl' + num).text('Choice' + length);        
+
+        }
+        if(length == 2) {
+
+            var slc_itm_val = $('input[type=checkbox]:checked').first().attr("id");
+
+            var slc_itm_val2 = $('input[type=checkbox]:checked').last().attr("id");
+
+            var num_inx_1 = slc_itm_val.slice(3);
+            var num_inx_2 = slc_itm_val2.slice(3);
+
+            var gt_val1 = $("#lbl" + num_inx_1).text();
+            var gt_val2 = $("#lbl" + num_inx_2).text();
+
+            var num1 = gt_val1.slice(6);
+
+            var num2 = gt_val2.slice(6);
+
+            if(this.value = num1) {
+               num = num_inx_1;
+               length = 1;
+               $('#lbl' + num).text('Choice' + length);
+               num = num_inx_2;
+               length = length + 1;
+               $('#lbl' + num).text('Choice' + length);
+            }       
+
+        }
+
+          $('#lbl' + i).text('');
+
+
+   }
+   else {
+
+
+             $('#lbl' + i).text('Choice' + length);
+             //index++;
+        }
+
+
+             //index++;
+         })
+   }
+
+</script>
+</body>
+</html>
